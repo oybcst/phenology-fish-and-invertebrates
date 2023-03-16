@@ -1,0 +1,257 @@
+---
+title: "Figures"
+author: "J Plumlee"
+date: "2023-03-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r packages}
+library(ggplot2)
+library(dplyr)
+library(tidyr) 
+library(mgcv)
+library(lubridate)
+```
+
+```{r analysis}
+#dirname <- 'G:/Other computers/My Laptop/Work/Post Doc/RESTORE Synthesis'
+dirname <- getwd()
+filename <- 'all_species_enviro.csv'
+df <- read.csv(file.path(dirname,filename))
+```
+
+```{r median}
+
+p_prey <- df[df$group == "Pelagic Prey",]
+
+p_prey <- na.omit(p_prey[p_prey$species != "Butterfish",])
+
+b_prey <- df[df$group == "Benthic Prey",]
+
+b_prey <- na.omit(b_prey[b_prey$species != "Mojarra",])
+
+f_spec <- df[df$group == "Fishery Species",]
+
+f_spec <- na.omit(f_spec[f_spec$species != "Whiting",])
+f_spec <- na.omit(f_spec[f_spec$species != "Sand Seatrout",])
+f_spec <- na.omit(f_spec[f_spec$species != "Pigfish",])
+
+p_prey$species <- factor(p_prey$species, levels = c("Atlantic Bumper", "Striped Anchovy", "Finger Anchovy", "Gulf Menhaden", "Bay Anchovy", "Striped Mullet"))
+
+p_prey$season <- factor(p_prey$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(p_prey[p_prey$decade == c("2000", "2010"),], aes(y = species, x = diff_median, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Median Peak Day of the Year for Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+b_prey$species <- factor(b_prey$species, levels = c("Star Drum", "Silver Perch", "Atlantic Croaker", "Spot"))
+
+b_prey$season <- factor(b_prey$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(b_prey[b_prey$decade == c("2000", "2010"),], aes(y = species, x = diff_median, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Median Peak Day of the Year for Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+f_spec$species <- factor(f_spec$species, levels = c("Spotted Seatrout", "White Shrimp", "Pink Shrimp", "Blue Crab", "Brown Shrimp", "Southern Flounder"))
+
+f_spec$season <- factor(f_spec$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(f_spec[f_spec$decade == c("2000", "2010"),], aes(y = species, x = diff_median, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Median Peak Day of the Year for Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+```
+
+```{r median}
+
+p_prey <- df[df$group == "Pelagic Prey",]
+
+p_prey <- na.omit(p_prey[p_prey$species != "Butterfish",])
+
+b_prey <- df[df$group == "Benthic Prey",]
+
+b_prey <- na.omit(b_prey[b_prey$species != "Mojarra",])
+
+f_spec <- df[df$group == "Fishery Species",]
+
+f_spec <- na.omit(f_spec[f_spec$species != "Whiting",])
+f_spec <- na.omit(f_spec[f_spec$species != "Sand Seatrout",])
+f_spec <- na.omit(f_spec[f_spec$species != "Pigfish",])
+
+p_prey$species <- factor(p_prey$species, levels = c("Atlantic Bumper", "Striped Anchovy", "Finger Anchovy", "Bay Anchovy", "Gulf Menhaden", "Striped Mullet"))
+
+p_prey$season <- factor(p_prey$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(p_prey[p_prey$decade == c("2000", "2010"),], aes(y = species, x = diff_range, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Range of Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+b_prey$species <- factor(b_prey$species, levels = c("Star Drum", "Silver Perch", "Atlantic Croaker", "Spot"))
+
+b_prey$season <- factor(b_prey$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(b_prey[b_prey$decade == c("2000", "2010"),], aes(y = species, x = diff_range, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Range of Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+f_spec$species <- factor(f_spec$species, levels = c("Spotted Seatrout", "White Shrimp", "Pink Shrimp", "Blue Crab", "Brown Shrimp", "Southern Flounder"))
+
+f_spec$season <- factor(f_spec$season, levels = c("Spring", "Summer", "Fall"))
+
+ggplot(f_spec[f_spec$decade == c("2000", "2010"),], aes(y = species, x = diff_range, fill = season)) +
+  geom_boxplot(outlier.shape = NA, size = 1.1, color = "black") +
+  scale_fill_viridis_d() +
+  geom_vline(xintercept = 0, linetype = "dashed", size = 1.1) +
+  xlim(-100,100) +
+  labs(x = "Difference in Range of Recruitment between 1980 and 2000-2020", fill = "Season") +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.y = element_line(color = "grey", size = 1.10, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+```
+
+```{r gam}
+
+menhaden_median <- gam(Median ~ s(yearly_tavg, k=3), data=df[df$species == "Menhaden",], family=poisson)
+
+menhaden_median_p <- plot(menhaden_median)
+
+silverperch_median <- gam(Median ~ s(yearly_drought, k=3), data=df[df$species == "Silver Perch",], family=poisson)
+
+silverperch_median_p <- plot(silverperch_median)
+
+brownshrimp_median <- gam(Median ~ s(yearly_tavg, k=3), data=df[df$species == "Brown Shrimp",], family=poisson)
+
+brownshrimp_median_p <- plot(brownshrimp_median)
+
+stripedanchovy_median <- gam(Median ~ s(yearly_drought, k=3), data=df[df$species == "Striped Anchovy",], family=poisson)
+
+stripedanchovy_median_p <- plot(stripedanchovy_median)
+
+pinkshrimp_median <- gam(Median ~ s(yearly_drought, k=3), data=df[df$species == "Pink Shrimp",], family=poisson)
+
+pinkshrimp_median_p <- plot(pinkshrimp_median)
+
+stardrum_median <- gam(Median ~ s(yearly_tavg, k=3), data=df[df$species == "Star Drum",], family=poisson)
+
+stardrum_median_p <- plot(stardrum_median)
+
+variables <- rbind(matrix(menhaden_median_p[[1]][["x"]]), matrix(silverperch_median_p[[1]][["x"]]), matrix(brownshrimp_median_p[[1]][["x"]]), matrix(stripedanchovy_median_p[[1]][["x"]]), matrix(pinkshrimp_median_p[[1]][["x"]]), matrix(stardrum_median_p[[1]][["x"]]))
+
+response <- rbind(matrix(menhaden_median_p[[1]][["fit"]]), matrix(silverperch_median_p[[1]][["fit"]]), matrix(brownshrimp_median_p[[1]][["fit"]]), matrix(stripedanchovy_median_p[[1]][["fit"]]), matrix(pinkshrimp_median_p[[1]][["fit"]]), matrix(stardrum_median_p[[1]][["fit"]]))
+
+error <- rbind(matrix(menhaden_median_p[[1]][["se"]]), matrix(silverperch_median_p[[1]][["se"]]), matrix(brownshrimp_median_p[[1]][["se"]]), matrix(stripedanchovy_median_p[[1]][["se"]]), matrix(pinkshrimp_median_p[[1]][["se"]]), matrix(stardrum_median_p[[1]][["se"]]))
+
+species <- rbind(matrix(rep("Menhaden", 100)), matrix(rep("Silver Perch", 100)), matrix(rep("Brown Shrimp", 100)), matrix(rep("Striped Anchovy", 100)), matrix(rep("Pink Shrimp", 100)), matrix(rep("Star Drum", 100)))
+
+median_tavg <- cbind(variables, response, error, species) 
+
+colnames(median_tavg) <- c("Variable", "Response", "Error", "Species")
+
+median_tavg <- as.data.frame(median_tavg)
+
+median_tavg$Variable <- as.numeric(median_tavg$Variable)
+median_tavg$Response <- as.numeric(median_tavg$Response)
+median_tavg$Error <- as.numeric(median_tavg$Error)
+median_tavg$Species <- as.factor(median_tavg$Species)
+
+menhaden <- median_tavg[median_tavg$Species == "Menhaden",]
+menhaden$Variable <- (menhaden$Variable-32)*5/9
+
+brownshrimp <- median_tavg[median_tavg$Species == "Brown Shrimp",]
+brownshrimp$Variable <- (brownshrimp$Variable-32)*5/9
+
+stardrum <- median_tavg[median_tavg$Species == "Star Drum",]
+stardrum$Variable <- (stardrum$Variable-32)*5/9
+
+silverperch <- median_tavg[median_tavg$Species == "Silver Perch",]
+silverperch <- silverperch[silverperch$Variable >= -10000,]
+
+stripedanchovy <- median_tavg[median_tavg$Species == "Striped Anchovy",]
+
+pinkshrimp <- median_tavg[median_tavg$Species == "Pink Shrimp",]
+pinkshrimp <- pinkshrimp[pinkshrimp$Variable >= -10000,]
+
+ggplot(menhaden, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#440154FF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#440154FF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.25, 0.70) +
+  scale_x_continuous(breaks=seq(18,22, by= 0.5)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Average Yearly Temperature")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+ggplot(brownshrimp, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#440154FF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#440154FF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.25, 0.70) +
+  scale_x_continuous(breaks=seq(18,22, by= 0.5)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Average Yearly Temperature")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+ggplot(stardrum, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#FDE725FF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#FDE725FF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.25, 0.70) +
+  scale_x_continuous(breaks=seq(18,22, by= 0.5)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Average Yearly Temperature")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+ggplot(silverperch, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#440154FF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#440154FF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.35, 0.40) +
+  scale_x_continuous(breaks=seq(-10000,10000, by= 5000)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Annual Drought Index")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+ggplot(stripedanchovy, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#21908CFF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#21908CFF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.35, 0.40) +
+  scale_x_continuous(breaks=seq(-10000,10000, by= 5000)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Annual Drought Index")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+ggplot(pinkshrimp, aes(x = Variable, y = Response))+
+  geom_line(size = 1.5, color = "#21908CFF") +
+  geom_ribbon(aes(ymin = Response - Error, ymax = Response + Error), alpha = 0.8, fill = "#21908CFF") +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed", size = 1.10) +
+  ylim(-0.35, 0.40) +
+  scale_x_continuous(breaks=seq(-10000,10000, by= 5000)) +
+  labs(y = "Additive Effect (Median DOY)", x = "Annual Drought Index")  +
+  theme(panel.background = element_rect(fill = "white", color = "black", size = 1.1), axis.title.y = element_blank(), panel.grid.major.x = element_line(color = "grey", size = 1, linetype = "dashed"), axis.title = element_text(color = "black", family = "sans", size = 12), axis.text = element_text(color = "black", family = "sans", size = 12), legend.title = element_text(color = "black", family = "sans", size = 14), legend.text = element_text(color = "black", family = "sans", size = 12))
+
+```
+
