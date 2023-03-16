@@ -7,3 +7,7 @@ For reference: [How to Use Binder and R for Reproducible Research, by Erik Marsj
 Looks like above is out of date.
 
 Try:  [The Turing Way](https://the-turing-way.netlify.app/communication/binder/zero-to-binder.html)
+
+Here's the Notebook:
+
+https://mybinder.org/v2/gh/lisalenorelowe/oybcst-fish/HEAD?labpath=index.ipynb
