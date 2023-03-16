@@ -10,4 +10,4 @@ Try:  [The Turing Way](https://the-turing-way.netlify.app/communication/binder/z
 
 Here's the Notebook:
 
-https://mybinder.org/v2/gh/lisalenorelowe/oybcst-fish/HEAD?labpath=index.ipynb
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lisalenorelowe/oybcst-fish/HEAD?labpath=index.ipynb)
