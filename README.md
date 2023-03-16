@@ -1,6 +1,6 @@
 # Phenology of Fish and Inverebrates in Mobile Bay, AL
 
-Jeffrey D. Plumlee, Ph.D., Postdoctoral Fellow and the University of South Alabama
+Jeffrey D. Plumlee, Ph.D., Postdoctoral Fellow at the University of South Alabama
 
 ## FAMP analysis
 
