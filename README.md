@@ -6,7 +6,7 @@ Jeffrey D. Plumlee, Ph.D., Postdoctoral Fellow at the University of South Alabam
 
 Here's a **DRAFT** Notebook containing R analysis of species samples.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lisalenorelowe/oybcst-fish/HEAD?labpath=index.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/OyBcSt/oybcst-fish/HEAD?labpath=index.ipynb)
 - If you run the Notebook, and make changes you like, *save* the Notebook, then *download* locally.
 
 
