@@ -1,4 +1,4 @@
-# Phenology of Fish and Inverebrates in Mobile Bay, AL
+# Phenology of Fish and Invertebrates in Mobile Bay, AL
 
 Jeffrey D. Plumlee, Ph.D., Postdoctoral Fellow at the University of South Alabama
 
